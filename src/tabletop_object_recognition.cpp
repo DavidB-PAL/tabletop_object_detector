@@ -376,7 +376,7 @@ void TabletopObjectRecognizer::publishFitMarkers(
         visualization_msgs::Marker fitMarker =  MarkerGenerator::getFitMarker(get_mesh.response.mesh, rank);
         fitMarker.header = table.pose.header;
         fitMarker.pose = models[j].pose.pose;
-        fitMarker.ns = "tabletop_node_model_" + boost::lexical_cast<std::string>(j);
+        fitMarker.ns = "tabletop_node_model_" + boost::lexical_cast<std::string>(i); // name each marker with own number
         fitMarker.id = current_marker_id_++;
         marker_pub_.publish(fitMarker);
       }  
