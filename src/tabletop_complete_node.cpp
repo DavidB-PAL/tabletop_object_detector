@@ -107,6 +107,11 @@ bool TabletopCompleteNode::serviceCallback(TabletopDetection::Request &request, 
   }
   ROS_INFO("Segmentation service succeeded. Detected %d clusters", (int)segmentation_srv.response.clusters.size());
   response.detection.table = segmentation_srv.response.table;
+
+  // Finished, object PointCloud clusters not requested
+  if (!request.return_clusters) return true;
+
+  // Finished, no clusters found, or matched models not requested
   response.detection.clusters = segmentation_srv.response.clusters;
   if (segmentation_srv.response.clusters.empty() || !request.return_models) return true;
 
